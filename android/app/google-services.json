@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "947057387608",
+    "project_id": "verde-1481b",
+    "storage_bucket": "verde-1481b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947057387608:android:970674c21aded08b59422d",
+        "android_client_info": {
+          "package_name": "com.example.softeng_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAygTY4C2bunh4uqj2mq3eg6qZvDM03cuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
