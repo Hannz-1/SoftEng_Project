@@ -6,8 +6,11 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // REGISTER USER
-  Future<User?> registerUser(String email, String password) async {
+  // REGISTER
+  Future<User?> registerUser(
+      String username,
+      String email,
+      String password) async {
 
     try {
 
@@ -21,6 +24,13 @@ class AuthService {
 
       await user?.sendEmailVerification();
 
+      // Save user to Firestore
+      await _firestore.collection("users").doc(user!.uid).set({
+        "username": username,
+        "email": email,
+        "createdAt": Timestamp.now(),
+      });
+
       return user;
 
     } catch (e) {
@@ -30,7 +40,7 @@ class AuthService {
 
   }
 
-  // LOGIN USER
+  // LOGIN
   Future<User?> loginUser(String email, String password) async {
 
     try {

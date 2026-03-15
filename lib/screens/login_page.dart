@@ -17,12 +17,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() async {
 
-    final user = await AuthService()
-        .loginUser(emailController.text, passwordController.text);
+    final user = await authService.loginUser(
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
 
     if (user != null) {
 
-      Navigator.pushNamed(context, "/home");
+      if (!user.emailVerified) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Please verify your email")),
+        );
+        return;
+      }
+
+      Navigator.pushReplacementNamed(context, "/home");
 
     } else {
 
@@ -60,6 +69,13 @@ class _LoginScreenState extends State<LoginScreen> {
             ElevatedButton(
               onPressed: login,
               child: const Text("Sign In"),
+            ),
+
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/register");
+              },
+              child: const Text("Create Account"),
             )
 
           ],

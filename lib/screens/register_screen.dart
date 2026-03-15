@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import '../models/user_model.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -19,14 +18,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void register() async {
 
-    final user = await AuthService()
-        .registerUser(emailController.text, passwordController.text);
+    final user = await authService.registerUser(
+      usernameController.text.trim(),
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
 
     if (user != null) {
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Verification email sent")),
+        const SnackBar(
+          content: Text("Verification email sent. Check your email."),
+        ),
       );
+
+      Navigator.pushReplacementNamed(context, "/login");
 
     } else {
 
